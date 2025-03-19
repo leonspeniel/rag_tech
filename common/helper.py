@@ -1,3 +1,4 @@
+from enum import Enum
 
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -13,6 +14,46 @@ def replace_tab_with_space(documents):
         document.page_content = document.page_content.replace('\t', " ")
 
     return documents
+
+
+# Enum class representing different embedding providers
+class EmbeddingProvider(Enum):
+    OPENAI = "openai"
+    COHERE = "cohere"
+    AMAZON_BEDROCK = "bedrock"
+
+# Enum class representing different model providers
+class ModelProvider(Enum):
+    OPENAI = "openai"
+    GROQ = "groq"
+    ANTHROPIC = "anthropic"
+    AMAZON_BEDROCK = "bedrock"
+
+def get_langchain_embedding_provider(provider: EmbeddingProvider, model_id: str = None):
+    """
+    Returns an embedding provider based on the specified provider and model ID.
+
+    Args:
+        provider (EmbeddingProvider): The embedding provider to use.
+        model_id (str): Optional -  The specific embeddings model ID to use .
+
+    Returns:
+        A LangChain embedding provider instance.
+
+    Raises:
+        ValueError: If the specified provider is not supported.
+    """
+    if provider == EmbeddingProvider.OPENAI:
+        from langchain_openai import OpenAIEmbeddings
+        return OpenAIEmbeddings(openai_api_key= config.OPENAI_API_KEY)
+    elif provider == EmbeddingProvider.COHERE:
+        from langchain_cohere import CohereEmbeddings
+        return CohereEmbeddings()
+    elif provider == EmbeddingProvider.AMAZON_BEDROCK:
+        from langchain_community.embeddings import BedrockEmbeddings
+        return BedrockEmbeddings(model_id=model_id) if model_id else BedrockEmbeddings(model_id="amazon.titan-embed-text-v2:0")
+    else:
+        raise ValueError(f"Unsupported embedding provider: {provider}")
 
 
 def encode_pdf(path, chunk_size, chunk_overlap):
@@ -31,7 +72,7 @@ def encode_pdf(path, chunk_size, chunk_overlap):
 
     return vector_store
 
-def retriever_context_per_question(question, chunk_query_retriever):
+def retrieve_context_per_question(question, chunk_query_retriever):
 
     documents = chunk_query_retriever.get_relevant_documents(question)
 

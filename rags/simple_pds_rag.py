@@ -36,7 +36,7 @@ class SimplePdfRag:
         :param query: The search query to retrieve relevant content.
         """
         start_time = time.time()
-        context = helper.retriever_context_per_question(query, self.chunk_query_retriever)
+        context = helper.retrieve_context_per_question(query, self.chunk_query_retriever)
 
         self.time_records['retrieval'] = time.time() - start_time
         print(f"Retrieval Time: {self.time_records['retrieval']:.2f} seconds")

@@ -2,5 +2,8 @@ python-dotenv
 langchain
 langchain-openai
 langchain-community
+langchain-cohere
 pypdf
 faiss-cpu
+llama-index
+llama-index-vector-stores-faiss
