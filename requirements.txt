@@ -7,3 +7,8 @@ pypdf
 faiss-cpu
 llama-index
 llama-index-vector-stores-faiss
+llama-index-vector-stores-chroma
+llama-index-callbacks-arize-phoenix
+arize-phoenix
+llama-parse
+chromadb

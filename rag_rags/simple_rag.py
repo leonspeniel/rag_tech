@@ -10,7 +10,7 @@ from common.helper import EmbeddingProvider
 load_dotenv()
 
 
-path = "../data/Agents_whitepaper.pdf"
+path = "../data_pdf/Agents_whitepaper.pdf"
 
 def encode_pdf(path, chunk_size=1000, chunk_overlap=200):
     """

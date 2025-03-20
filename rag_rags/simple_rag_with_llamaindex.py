@@ -24,7 +24,7 @@ CHUNK_OVERLAP = 50
 Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small", dimensions=EMBED_DIMENSION,
                                        api_key=config.OPENAI_API_KEY)
 
-path = "../data/"
+path = "../data_pdf/"
 node_parser = SimpleDirectoryReader(input_dir=path, required_exts=['.pdf'])
 documents = node_parser.load_data()
 print(documents[0])
