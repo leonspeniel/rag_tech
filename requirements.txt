@@ -3,6 +3,7 @@ langchain
 langchain-openai
 langchain-community
 langchain-cohere
+langchain-core
 pypdf
 faiss-cpu
 llama-index
